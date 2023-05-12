@@ -124,6 +124,14 @@
 
             </Grid>
 
+            <StackPanel x:Name="echoEffectContainer" Margin="0,50,0,0"  >
+                
+                <TextBlock x:Name="echoLabel" Height="23" Width="119" HorizontalAlignment="Left" Text="Delay: 500ms" Foreground="#4A4A4A"/>
+                <Slider x:Name="echoSlider" Value="{Binding Echo}" Maximum="2000" Minimum="50" SmallChange="500" IsEnabled="False" HorizontalAlignment="Left"/>
+            </StackPanel>
+            
+
+
         </StackPanel>
     </Grid>
 </Page>

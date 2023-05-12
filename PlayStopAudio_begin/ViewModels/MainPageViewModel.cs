@@ -13,6 +13,9 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.Foundation.Collections;
+using Windows.Media.Effects;
+using AudioEffectComponent;
 
 namespace PlayStopAudio_begin.ViewModels
 {
@@ -58,6 +61,9 @@ namespace PlayStopAudio_begin.ViewModels
             RoomSize = 20;
             ReverbGain = -20;
             reverb = 0;
+
+           
+
 
         }
 
@@ -221,6 +227,17 @@ namespace PlayStopAudio_begin.ViewModels
             fileInputNode.EffectDefinitions.Add(effectDefinition);
         }
 
+        private void CreateEchoEffect()
+        {
+            // Create a property set and add a property/value pair
+            PropertySet echoProperties = new PropertySet();
+            echoProperties.Add("Mix", 0.5f);
+
+            // Instantiate the custom effect defined in the 'CustomEffect' project
+            AudioEffectDefinition echoEffectDefinition = new AudioEffectDefinition(typeof(ExampleAudioEffect).FullName, echoProperties);
+            fileInputNode.EffectDefinitions.Add(echoEffectDefinition);
+        }
+
         private async void Play()
         {
             if (audioGraph == null)
@@ -272,6 +289,7 @@ namespace PlayStopAudio_begin.ViewModels
 
             }
             audioGraph.Start();
+            CreateEchoEffect();
             CreateReverbEffect();
         }
 
